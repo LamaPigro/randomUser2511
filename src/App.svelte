@@ -1,6 +1,6 @@
 <script>
   async function GetUserProfile() {
-    const response = await fetch("https://randomuser.me/api/")
+    const response = await fetch("https://randomuser.me/api/") // generazione random dati
 
     // verifica controllo dati
     if (response.ok) {
@@ -12,10 +12,14 @@
   }
 </script>
 
-<main>
-  
-</main>
-
-<style>
-  
-</style>
+{#await GetUserProfile()}
+  <div>Loading...</div>
+{:then profile}
+  <pre> <!-- pre, considera l'intestazione -->
+    {JSON.stringify(profile, null, 2)}
+  </pre>
+{:catch error}
+  <pre> 
+    {JSON.stringify(error, null, 2)}
+  </pre>
+{/await}
